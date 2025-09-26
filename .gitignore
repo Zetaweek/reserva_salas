@@ -21,4 +21,10 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
-*.swo
+*.swo# Claves SSH
+*.pem
+*.key
+*.pub
+040911*
+# Directorios de datos
+addons/
