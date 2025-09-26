@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menú principal -->
+    <menuitem id="menu_reserva_salas_main" name="Reserva de Salas" sequence="10"/>
+    
+    <!-- Submenú para Salas -->
+    <menuitem id="menu_reserva_salas" name="Salas" parent="menu_reserva_salas_main" action="action_sala" sequence="10"/>
+        
+    <!-- Submenú para Reservas -->
+    <menuitem id="menu_reserva_reservas" name="Reservas" parent="menu_reserva_salas_main" action="action_reserva" sequence="20"/>
+
+    <menuitem id="menu_reserva_invitaciones" name="Invitaciones" parent="menu_reserva_salas_main" action="action_invitacion" sequence="30"/>
+</odoo>

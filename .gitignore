@@ -1,0 +1,24 @@
+# Docker
+config/
+postgres-backups/
+odoo-data/
+postgres-data/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

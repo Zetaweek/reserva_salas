@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========== VISTAS ========== -->
+    <!-- Vista árbol (lista) -->
+    <record id="view_reserva_tree" model="ir.ui.view">
+        <field name="name">reserva.reserva.tree</field>
+        <field name="model">reserva.reserva</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sala_id"/>
+                <field name="fecha_reserva"/>
+                <field name="hora_inicio"/>
+                <field name="hora_fin"/>
+                <field name="usuario_id" widget="many2one"/>
+                <field name="estado" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista formulario -->
+    <record id="view_reserva_form" model="ir.ui.view">
+        <field name="name">reserva.reserva.form</field>
+        <field name="model">reserva.reserva</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <!-- Grupo 1 Inf. básica -->
+                    <group string="Información de la Reserva" col="2">
+                        <field name="sala_id" 
+                               string="Sala a Reservar"
+                               placeholder="Seleccione una sala..."
+                               help="Elija la sala que desea reservar"
+                               options="{'no_create': True}"/>
+                        
+                        <field name="usuario_id" 
+                               string="Reservado para"
+                               placeholder="Usuario con email @reservas.cl"
+                               help="Usuario que usará la sala"
+                               widget="many2one"/>
+                    </group>
+                    
+                    <!-- Grupo 2 Fecha y estado -->
+                    <group string="Fechas" col="2">
+                        <field name="fecha_reserva" 
+                               string="Fecha"
+                               default="today"
+                               help="Fecha para la cual se hace la reserva"/>
+                        
+                        <field name="estado" 
+                               string="Estado"
+                               widget="radio"
+                               help="Estado actual de la reserva"/>
+                    </group>
+                    
+                    <!-- Grupo 3: Horarios -->
+                    <group string="Horarios" col="2">
+                        <field name="hora_inicio" 
+                               string="Hora inicio"
+                               help="Hora de inicio de la reserva"/>
+                        
+                        <field name="hora_fin" 
+                               string="Hora fin" 
+                               help="Hora de finalización de la reserva"/>
+                    </group>
+                    
+                    <!-- Grupo 4: Comentarios -->
+                    <group string="Detalles Adicionales">
+                        <field name="comentarios" 
+                               placeholder="Ej: Necesitamos proyector y pizarra..."
+                               widget="textarea"
+                               help="Información adicional o requerimientos especiales"/>
+                    </group>
+
+                    <!-- Grupo de Invitaciones -->
+                    <group string="Invitaciones">
+                        <field name="invitacion_ids" 
+                               string="Invitaciones asociadas"
+                               mode="tree,form">
+                            <tree>
+                                <field name="usuario_invitado_id"/>
+                                <field name="fecha_invitacion"/>
+                                <field name="estado" widget="badge"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="usuario_invitado_id"/>
+                                    <field name="estado"/>
+                                    <field name="token_verificacion" readonly="1"/>
+                                </group>
+                            </form>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ========== ACCIONES ========== -->
+    <record id="action_reserva" model="ir.actions.act_window">
+        <field name="name">Reservas</field>
+        <field name="res_model">reserva.reserva</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_reserva_tree"/>
+    </record>
+</odoo>

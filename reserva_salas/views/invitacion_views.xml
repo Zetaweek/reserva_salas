@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista árbol para Invitaciones -->
+    <record id="view_invitacion_tree" model="ir.ui.view">
+        <field name="name">reserva.invitacion.tree</field>
+        <field name="model">reserva.invitacion</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reserva_id"/>
+                <field name="usuario_invitado_id"/>
+                <field name="fecha_invitacion"/>
+                <field name="estado" widget="badge"/>
+                <field name="token_verificacion"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista formulario para Invitaciones -->
+    <record id="view_invitacion_form" model="ir.ui.view">
+        <field name="name">reserva.invitacion.form</field>
+        <field name="model">reserva.invitacion</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Información de la Invitación" col="2">
+                        <field name="reserva_id" 
+                               string="Reserva"
+                               options="{'no_create': True}"/>
+                        
+                        <field name="usuario_invitado_id" 
+                               string="Usuario Invitado"
+                               domain="[('login', 'ilike', '@reservas.cl')]"/>
+                    </group>
+                    
+                    <group string="Estado y Fechas" col="2">
+                        <field name="fecha_invitacion" readonly="1"/>
+                        <field name="estado" widget="radio"/>
+                    </group>
+                    
+                    <group string="Verificación">
+                        <field name="token_verificacion" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción para Invitaciones -->
+    <record id="action_invitacion" model="ir.actions.act_window">
+        <field name="name">Invitaciones</field>
+        <field name="res_model">reserva.invitacion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
